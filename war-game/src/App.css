@@ -1,0 +1,77 @@
+.App {
+  text-align: center;
+}
+
+.none{
+  display: none;
+}
+
+.cardBody{
+  width: 9rem;
+  height: 15rem;
+
+  border: 1px solid darkgray;
+  border-radius: 2em;
+
+  background-color: #eaebe6;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+.cardImageFlipped{
+  width: 90%;
+  height: 90%;
+
+  border-radius: 2em;
+
+  display: flex;
+  align-self: center;
+}
+
+.cardTitleT{
+  font-weight: 700;
+  font-size: 2rem;
+
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-self: self-end;
+
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+}
+
+.cardTitleB{
+  font-weight: 700;
+  font-size: 2rem;
+
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-self: self-start;
+
+  padding-left: 1rem;
+  padding-top: 1rem;
+}
+
+.cardImage{
+  width: 60%;
+  height: 40%;
+
+  display: flex;
+  align-self: center;
+}
+
+.sideBoard{
+  width: 80%;
+  height: 17rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
