@@ -1,30 +1,19 @@
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import Board from './components/Board';
-//import Score from './components/Score';
+import Main from './pages/Main'
+import Score from './pages/Score'
+import GameBoard from './pages/GameBoard'
 
 function App() {
-  const [display, setDisplay] = useState();
-
-  const [load, setLoad] = useState(true);
-
-  const toBoard = () => {setDisplay(<Board/>);}
-
-  /*const toScore = () => {setDisplay(<Score win={0}/>);}
-    <input type='button' onClick={toScore} value='Score'/>
-  */
-
-  if(load){
-    setLoad(!load);
-
-    setDisplay(<div>
-      <h1>War-Game</h1>
-      <input type='button' onClick={toBoard} value='Start The Game'/>
-      </div>);
-  }
-
-  return (<div className="App">{display}</div>);
+  return (<Router>
+    <Routes>
+      <Route path='/' element={<Main />} />
+      <Route path='/score' element={<Score />} />
+      <Route path='/game-board' element={<GameBoard />} />
+    </Routes>
+  </Router>);
 }
 
 export default App;

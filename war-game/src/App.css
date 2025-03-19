@@ -11,7 +11,7 @@
   height: 15rem;
 
   border: 1px solid darkgray;
-  border-radius: 2em;
+  border-radius: 12px;
 
   background-color: #eaebe6;
 
@@ -25,46 +25,26 @@
   width: 90%;
   height: 90%;
 
-  border-radius: 2em;
+  border-radius: 12px;
 
   display: flex;
   align-self: center;
 }
 
-.cardTitleT{
-  font-weight: 700;
-  font-size: 2rem;
+.rotateMe:hover{
+  transition-property: all;
+  transition-duration: 500ms;
+  transition-delay: 0ms;
 
-  margin: 0;
-  padding: 0;
-
-  display: flex;
-  align-self: self-end;
-
-  padding-right: 1rem;
-  padding-bottom: 1rem;
+  transform: rotateY(0deg);
 }
 
-.cardTitleB{
-  font-weight: 700;
-  font-size: 2rem;
+.rotateMeBack{
+  transition-property: all;
+  transition-duration: 750ms;
+  transition-delay: 0ms;
 
-  margin: 0;
-  padding: 0;
-
-  display: flex;
-  align-self: self-start;
-
-  padding-left: 1rem;
-  padding-top: 1rem;
-}
-
-.cardImage{
-  width: 60%;
-  height: 40%;
-
-  display: flex;
-  align-self: center;
+  transform: rotateY(180deg);
 }
 
 .sideBoard{
