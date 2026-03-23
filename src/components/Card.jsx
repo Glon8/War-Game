@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
-import Hearts from '../images/Hearts.png'
-import Spades from '../images/Spades.png'
-import Dimonds from '../images/Dimonds.png'
-import Clubs from '../images/Clubs.png'
-import Joker from '../images/Joker.png'
-import Turned from '../images/Turned.png'
+import Hearts from '../images/ChatGPTHearts.webp'
+import Spades from '../images/ChatGPTSpades.webp'
+import Dimonds from '../images/ChatGPTDimonds.webp'
+import Clubs from '../images/ChatGPTClubs.webp'
+import Joker from '../images/ChatGPTJoker.webp'
+import Turned from '../images/ChatGPTTurned.webp'
 
 export default function Card({ card, customDesc, turn, onClick }) {
     //{power: 3, type: 2, state: 0}
@@ -15,6 +15,7 @@ export default function Card({ card, customDesc, turn, onClick }) {
     const [useStat, setStat] = useState(card.state);
     const [useCall, setCall] = useState(false);
 
+    /*
     const turnUp = () => {
         setTimeout(() => {
             setStat(!useStat);
@@ -80,7 +81,7 @@ export default function Card({ card, customDesc, turn, onClick }) {
         }
 
     }
-
+*/
     useEffect(() => {
         if (card.state) assign();
         else {

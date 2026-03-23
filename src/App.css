@@ -1,12 +1,22 @@
+body {
+  width: 100%;
+  height: 100vh;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
 .App {
   text-align: center;
 }
 
-.none{
-  display: none;
+.bg-t-5 {
+  background-color: rgba(250, 250, 250, 0.5);
 }
 
-.cardBody{
+.cardBody {
   width: 9rem;
   height: 15rem;
 
@@ -21,7 +31,7 @@
   justify-content: center;
 }
 
-.cardImageFlipped{
+.cardImageFlipped {
   width: 90%;
   height: 90%;
 
@@ -31,7 +41,7 @@
   align-self: center;
 }
 
-.sideBoard{
+.sideBoard {
   width: 80%;
   height: 17rem;
 
