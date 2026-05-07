@@ -10,16 +10,27 @@ export default function Main() {
 
     const jokerCard = { power: 15, type: 5, state: false };
 
-    return (<div className='w-per-20 h-per-20 justify-i-c align-c-c bg-c-green'>
+    return (<div className='w h bg justify-i-c align-c-c bg-c-green'>
 
-        <div className=' w-per-20 h-per-20 max-w-14 max-h-12 p-x-5 p-y-9 flex flex-c align-i-c r-4 bg-t-5 box-sh-md-o-3' >
+        <div className='w h b bg
+        max-w-75 max-h-70
+        p-x-5 p-y-9 
+        p-unit-per
+        flex flex-d-c 
+        align-i-c 
+        b-r-10 
+        bg-c-light bg-c-op-lg 
+        box-sh-md-o-3'>
 
-            <h1 className='w-per-20 c-red text-a-c text-d text-d-s-wavy text-d-c-red text-d-t-px-1 font-s-12 drop-shadow-md font-bold align-middle'>War-Game</h1>
-            <div className='mt-[10%] flex justify-between'>
+            <h1 className='text font c-red text-a-c text-d-und text-d-s-wavy text-d-c-red text-d-t-5 font-s-4 font-w-7 font-s-unit-rem'>War-Game</h1>
+            <div className='w w-100 w-unit-per m-t-10 m-unit-per grid grid-t-c-2-12 grid-t-c-unit-rem justify-c-b'>
                 {/*
                 <Card card={jokerCard} customDesc={'SCORE'} turn={true} onClick={toScore} />
                 <Card card={jokerCard} customDesc={'PLAY'} turn={true} onClick={toBoard} />
-                */}
+                */
+                }
+                <Card card={{ power: 15, type: 5, state: false }} />
+                <Card card={{ power: 15, type: 5, state: false }} />
 
             </div>
 
