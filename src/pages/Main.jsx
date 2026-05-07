@@ -29,8 +29,8 @@ export default function Main() {
                 <Card card={jokerCard} customDesc={'PLAY'} turn={true} onClick={toBoard} />
                 */
                 }
-                <Card card={{ power: 15, type: 5, state: false }} />
-                <Card card={{ power: 15, type: 5, state: false }} />
+                <Card card={{ power: 15, type: 5 }} />
+                <Card card={{ power: 15, type: 5 }} state={true} />
 
             </div>
 
