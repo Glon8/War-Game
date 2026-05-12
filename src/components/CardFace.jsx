@@ -53,8 +53,8 @@ export default function CardFace({ face, display }) {
         assign(face);
     }, [face]);
 
-    return (<div className={`w h flex b bg font max-w-100 max-h-100 w-100 w-unit-per relative
-    h-100 h-unit-per flex-d-c p-x-4 p-y-3 bg-c-light bg-c-op-no box-sh-lg-o-1 font-w-7 font-s-25 ${display ? '' : 'none'}`}>
+    return (<div className={`w h flex b bg font w-100 w-unit-per relative
+    h-100 h-unit-per flex-d-c p-x-4 bg-c-light bg-c-op-no font-w-7 font-s-25 ${display ? '' : 'none'}`}>
 
         <div className='w h w-95 top-1 left-4 w-unit-per align-c-c absolute'><img className='w w-100 w-unit-per' src={useImg} alt={useAlt} /></div>
         <div className='w h flex w-100 h-100 w-unit-per h-unit-per justify-c-btw'>

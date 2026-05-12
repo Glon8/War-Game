@@ -6,6 +6,7 @@ import Wrap from '../components/Wrap';
 import BackBoard from '../components/BackBoard';
 import Button from '../components/Button';
 import Card from '../components/Card';
+import InitialsTag from '../components/InitialsTag';
 
 export default function Board() {
    const [use_player_pool_size, set_player_pool_size] = useState(0);
@@ -18,10 +19,8 @@ export default function Board() {
    const player_pool = [];
    const computer_pool = [];
 
-   const jokerCard = {power: 15, type: 5, state: false};
-
-   const defCard = {power: 1, type: 1, state: false}
-   const stock = [defCard, defCard, defCard]
+   const jokerCard = { power: 15, type: 5 };
+   const stock = [jokerCard, jokerCard, jokerCard]
 
    //===================================================================== functions
    const navigate = useNavigate();
@@ -143,20 +142,32 @@ export default function Board() {
    });
 
   return (<Wrap>
-  
-    <BackBoard>
+    
+    <div className='w flex w-100 w-unit-per f-res gap-15 justify-c-c'>
 
-        <div className='flex relative'>
-          <div><Card card={defCard} turn={false} /></div>
-          <div className='w-[70%] mx-20 absolute right-20'><StockPile stock={computer_pool} /></div>
+      <Button w={'w-res w-12 w-unit-rem'} b={true} onClick={toMain} value={'To Main'} />
+      <Button w={'w-res w-12 w-unit-rem'} b={true} onClick={pull_card} value={'Pull Card'} />
+      <Button w={'w-res w-12 w-unit-rem'} b={true} onClick={() => {}} value={'Auto Play'}/>
+      
+    </div>
+    <BackBoard w={'max-w-40'} cust={'justify-c-ard'}>
+
+        <div className='w w-res flex f-res gap-10'>
+          
+          <Card sh={'box-sh-sm-o-3'} card={jokerCard} flipable={false} />
+          <StockPile stock={computer_pool} />
+
         </div>
-        <div className='flex mt-[10%] justify-between relative'>
-          <div><Card card={defCard} turn={false} onClick={pull_card} /></div>
-          <div className='w-[70%] mx-20 absolute right-20'><StockPile stock={stock} /></div>
-          <div><Card card={jokerCard} customDesc={'Main'} turn={true} onClick={toMain}/></div>
+        <div className='w w-res flex f-res gap-10'>
+
+          <Card sh={'box-sh-sm-o-3'} card={jokerCard} flipable={false} onClick={pull_card} />
+          <StockPile stock={stock} />
+          
         </div>
 
-    </BackBoard>
+    </BackBoard> 
+    <InitialsTag cust={'text text-d-und text-d-s-solid text-d-t-1'}/>
+    <InitialsTag cust={'m-t-0'} value={'War-Game'}/>
   
   </Wrap>)
 }

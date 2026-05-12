@@ -59,7 +59,8 @@ export default function Score({ scores, win }) {
       <Button b={true} onClick={toMain} value={'To Main'} />
 
     </BackBoard>
-    <InitialsTag />
+    <InitialsTag cust={'text text-d-und text-d-s-solid text-d-t-1'} />
+    <InitialsTag cust={'m-t-0'} value={'War-Game'} />
 
   </Wrap>)
 }
