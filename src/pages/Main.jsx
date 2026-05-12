@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
 import Card from '../components/Card';
+import Button from '../components/Button';
 
 export default function Main() {
     const navigate = useNavigate();
@@ -8,13 +9,12 @@ export default function Main() {
     const toBoard = () => { navigate('/game-board') }
     const toScore = () => { navigate('/score') }
 
-    const jokerCard = { power: 15, type: 5, state: false };
-
-    return (<div className='w h bg justify-i-c align-c-c bg-c-green'>
+    return (<div className='w h bg flex justify-i-c align-c-c bg-c-green flex-d-c justify-c-c align-i-c'>
 
         <div className='w h b bg
-        max-w-75 max-h-70
-        p-x-5 p-y-9 
+        max-w-35 max-w-unit-rem 
+        max-h-70
+        p-x-5 p-t-7 
         p-unit-per
         flex flex-d-c 
         align-i-c 
@@ -22,24 +22,16 @@ export default function Main() {
         bg-c-light bg-c-op-lg 
         box-sh-md-o-3'>
 
-            <h1 className='text font c-red text-a-c text-d-und text-d-s-wavy text-d-c-red text-d-t-5 font-s-4 font-w-7 font-s-unit-rem'>War-Game</h1>
-            <div className='w w-100 w-unit-per m-t-10 m-unit-per grid grid-t-c-2-12 grid-t-c-unit-rem justify-c-b'>
-                {/*
-                <Card card={jokerCard} customDesc={'SCORE'} turn={true} onClick={toScore} />
-                <Card card={jokerCard} customDesc={'PLAY'} turn={true} onClick={toBoard} />
-                */
-                }
-                <Card card={{ power: 15, type: 5 }} />
-                <Card card={{ power: 15, type: 5 }} state={true} />
-
+            <h1 className='text font c-dark c-op-sm c-sh-dark text-a-c text-d-und text-d-s-wavy text-d-t-5 font-s-4 font-w-7 font-s-unit-rem'>War-Game</h1>
+            <div className='w h flex w-100 w-unit-per h-50 h-unit-per m-unit-per d-column align-i-c m-t-10 gap-25'>
+                <Button b={true} value={'Start The Game'} onClick={toBoard} />
+                <Button b={true} value={'Score'} onClick={toScore} />
             </div>
 
         </div>
 
+        <p className='font font-w-5 font-st-it'>Mady by Glon8 | Demon_ruz</p>
+
     </div>);
-
-    //<Button value={'Start The Game'} onClick={toBoard} />
-    //<Button value={'Score'} onClick={toScore} />
-
 }
 
