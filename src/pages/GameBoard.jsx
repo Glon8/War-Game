@@ -2,6 +2,9 @@ import React, {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import StockPile from '../components/StockPile';
 
+import Wrap from '../components/Wrap';
+import BackBoard from '../components/BackBoard';
+import Button from '../components/Button';
 import Card from '../components/Card';
 
 export default function Board() {
@@ -139,9 +142,9 @@ export default function Board() {
     splitTheDeckBetweenThePlayers();
    });
 
-  return (<div className='w-screen h-screen px-[10%] py-[2%] flex justify-center overflow-hidden bg-emerald-600'>
+  return (<Wrap>
   
-      <div className='w-full h-full px-[2rem] py-[2%] blur-box bg-white/25 flex flex-col justify-center rounded-lg'>
+    <BackBoard>
 
         <div className='flex relative'>
           <div><Card card={defCard} turn={false} /></div>
@@ -153,9 +156,9 @@ export default function Board() {
           <div><Card card={jokerCard} customDesc={'Main'} turn={true} onClick={toMain}/></div>
         </div>
 
-      </div>
+    </BackBoard>
   
-    </div>)
+  </Wrap>)
 }
 
 /*

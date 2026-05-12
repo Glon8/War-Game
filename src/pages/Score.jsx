@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import Card from '../components/Card';
+import Wrap from '../components/Wrap';
+import BackBoard from '../components/BackBoard';
+import Title from '../components/Title';
+import Button from '../components/Button';
+import InitialsTag from '../components/InitialsTag';
 
 export default function Score({ scores, win }) {
   const navigate = useNavigate();
@@ -37,27 +41,25 @@ export default function Score({ scores, win }) {
     setList(testArr);
   }, []);
 
-  return (<div className='w-screen h-screen px-[10rem] py-[5rem] flex justify-center overflow-hidden bg-emerald-600'>
+  return (<Wrap>
 
-    <div className='w-full h-full max-w-[40rem] px-[7rem] py-[3rem] blur-box bg-white/25 flex flex-col justify-center rounded-lg'>
+    <BackBoard cust={'justify-c-evn'}>
 
-      <p className='text-orange-50 underline decoration-black decoration-wavy underline-offset-8 decoration-4 text-[5rem] drop-shadow-md font-bold align-middle text-center'>Score List</p>
-      <p className={`${win == null ? 'hidden' : ''} text-center bg-white/95 rounded-lg text-black drop-shadow-sm font-bold text-2xl my-3`}>{winningPrase}</p>
-      <div className={`bg-white/95 rounded-lg px-3 py-4 mt-5`}>
+      <Title font={'font-s-3 font-w-7 font-s-unit-rem'} cust={'m-t-0'} value={'Score List'} />
+      <div className={`w h w-res w-95 w-unit-per h-res h-50 h-unit-per b bg bg-c-light bg-c-op-md b-r-5 p-x-3 p-y-4 mt-5`}>
         {
           useList?.map((el) => {
-            return (<div className='flex flex-row justify-between border-b-black border-b-2'>
-              <p className='font-medium'>{el.name}</p>
+            return (<div className='f-res flex justify-between border-b-black border-b-2 gap-10'>
+              <p className='font-medium'>{`${el.name}:`}</p>
               <p className='font-bold'>{el.score}</p>
             </div>);
           })
         }
       </div>
-      <div className='mt-5 flex justify-center rotate-90 hover:rotate-0 transition-all duration-500 delay-75'>
-        <Card card={jokerCard} customDesc={'Menu'} turn={true} onClick={toMain} />
-      </div>
+      <Button b={true} onClick={toMain} value={'To Main'} />
 
-    </div>
+    </BackBoard>
+    <InitialsTag />
 
-  </div>)
+  </Wrap>)
 }
