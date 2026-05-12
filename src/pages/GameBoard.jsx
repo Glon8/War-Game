@@ -19,21 +19,22 @@ export default function Board() {
    const player_pool = [];
    const computer_pool = [];
 
-   const jokerCard = { power: 15, type: 5 };
-   const stock = [jokerCard, jokerCard, jokerCard]
+   const stock = []
 
+   const jokerCard = { power: 15, type: 5 };
    //===================================================================== functions
    const navigate = useNavigate();
 
    const toMain = () => { navigate('/') }
-   const toScore = () => { navigate('/score') }
+   //const toScore = () => { navigate('/score') }
 
    const  shouffleCards = async (arr) => {arr.sort(() => Math.random() - 0.5);}
 
+   /*
    const createCardDeck = async () => {
     for(let i = 1; i <= 4; i++){
       for(let j = 2; j <= 14; j++){
-        card_deck.push({power: j, type: i, state: false});
+        card_deck.push({power: j, type: i});
       }
     }
 
@@ -76,7 +77,7 @@ export default function Board() {
     return sum;
    }
 
-   const pull_card = () => {
+   const pullCard = () => {
     if(player_deck.length !== 0 && computer_deck.length !== 0){
     player_pool.push(player_deck.shift());
     computer_pool.push(computer_deck.shift());
@@ -117,7 +118,7 @@ export default function Board() {
         computer_pool.push(computer_deck.shift());
       }
 
-      pull_card();
+      pullCard();
     }
    }
   else {
@@ -140,13 +141,13 @@ export default function Board() {
 
     splitTheDeckBetweenThePlayers();
    });
-
+*/
   return (<Wrap>
     
     <div className='w flex w-100 w-unit-per f-res gap-15 justify-c-c'>
 
       <Button w={'w-res w-12 w-unit-rem'} b={true} onClick={toMain} value={'To Main'} />
-      <Button w={'w-res w-12 w-unit-rem'} b={true} onClick={pull_card} value={'Pull Card'} />
+      <Button w={'w-res w-12 w-unit-rem'} b={true} onClick={pullCard} value={'Pull Card'} />
       <Button w={'w-res w-12 w-unit-rem'} b={true} onClick={() => {}} value={'Auto Play'}/>
       
     </div>
@@ -160,7 +161,7 @@ export default function Board() {
         </div>
         <div className='w w-res flex f-res gap-10'>
 
-          <Card sh={'box-sh-sm-o-3'} card={jokerCard} flipable={false} onClick={pull_card} />
+          <Card sh={'box-sh-sm-o-3'} card={jokerCard} flipable={false} onClick={pullCard} />
           <StockPile stock={stock} />
           
         </div>
