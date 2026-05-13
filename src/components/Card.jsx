@@ -4,7 +4,7 @@ import CardFace from './CardFace'
 
 // <Card card={{ power: 15, type: 5 }} stat={true} />
 
-function Card({ card, stat, flipable = true, onClick, sh }) {
+function Card({ card, stat, flipable = true, onClick, sh, cust }) {
     const [useStat, setStat] = useState(stat ?? false);
 
     // ====================================> MUST ADD FLIPPING ANIMATION IN THE FUTURE
@@ -17,7 +17,7 @@ function Card({ card, stat, flipable = true, onClick, sh }) {
         setStat(stat);
     }, [stat]);
 
-    return (<div className={`w h b w-res w-10 w-unit-rem h-res h-16 h-unit-rem flex relative ${sh ?? 'box-sh-lg-o-1'}`}>
+    return (<div className={`w h b w-res w-10 w-unit-rem h-res h-16 h-unit-rem flex relative ${sh ?? 'box-sh-lg-o-1'} ${cust ?? ''}`}>
 
         <CardFace display={useStat} face={card} />
         <CardFace display={!useStat} />
