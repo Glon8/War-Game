@@ -63,70 +63,64 @@ export default function Board() {
     return sum;
   }
 
-  const pullCard = () => {
-    pHand.current.unshift(pDeck.current.pop());
+  const collectCards = (wDeck, wHand, lHand) => {
+    if (!wDeck || !wHand || !lHand) return;
 
-    updateUI();
+    shouffleCards(wHand);
+    shouffleCards(lHand);
+
+    while (wHand.length !== 0) {
+      wDeck.unshift(wHand.shift());
+      wDeck.unshift(lHand.shift());
+    }
+  }
+
+  const endGame = (winner) => {
+    if (debug) console.log(`${winner} Won!`);
+
+    // ENDGAME SCREEN HERE
+  }
+
+  const powerTest = () => {
+    const pPower = handPower(pHand.current);
+    const pcPower = handPower(pcHand.current);
+    // if player has the strongest hand
+    if (pPower > pcPower) collectCards(pDeck.current, pHand.current, pcHand.current);
+    // if computer has the strongest hand
+    else if (pPower < pcPower) collectCards(pcDeck.current, pcHand.current, pHand.current);
+    else { // < if a tie 
+      if (pDeck.current.length < 4) endGame('Computer');
+      else if (pcDeck.current.length < 4) endGame('Player');
+      else {
+        for (let i = 0; i < 4; i++) {
+          pHand.current.unshift(pDeck.current.pop());
+          pcHand.current.unshift(pcDeck.current.pop());
+        }
+
+        powerTest();
+      }
+    }
+  }
+
+  const makeATurn = () => {
+    const pDL = pDeck.current.length;
+    const pcDL = pcDeck.current.length;
+
+    if (!!pDL && !!pcDL) { // < in case if both players still have cards in their decks
+      pHand.current.unshift(pDeck.current.pop());
+      pcHand.current.unshift(pcDeck.current.pop());
+
+      updateUI();
+
+      powerTest();
+    }
+    else { // < in case if one of the players lost all the cards in their deck
+      if (!pDL) endGame('Computer');
+      else endGame('Player');
+    }
 
     if (debug) console.log('E: Card has been pulled');
   }
-  /*
-     const pullCard = () => {
-      if(player_deck.length !== 0 && computer_deck.length !== 0){
-      player_pool.push(player_deck.shift());
-      computer_pool.push(computer_deck.shift());
-  
-      print_game_stats();
-  
-      const player_power = handPower(player_pool);
-      const computer_power = handPower(computer_pool);
-  
-      if(player_power > computer_power) { //      < if player has the strongest pool of cards
-        shouffle_both_pools();
-  
-        count_piles_size();
-  
-        while(player_pool.length !== 0) player_deck.push(player_pool.shift());
-        while(computer_pool.length !== 0) player_deck.push(computer_pool.shift());
-      }
-      else if(player_power < computer_power){ //   < if computer has the strongest pool of cards
-        shouffle_both_pools();
-  
-        count_piles_size();
-  
-        while(computer_pool.length !== 0) computer_deck.push(computer_pool.shift());
-        while(player_pool.length !== 0) computer_deck.push(player_pool.shift());
-      }
-      else{ //                                      < if tie
-        if(player_deck.length < 4) {
-          if(debug) console.log("Computer Won!");
-         // setDisplay(<Score win={1}/>);
-        }
-        else if(computer_deck.length < 4) {
-          if(debug) console.log("Player Won!");
-          //setDisplay(<Score win={2}/>);
-        }
-  
-        for(let i = 0; i < 3; i++){
-          player_pool.push(player_deck.shift());
-          computer_pool.push(computer_deck.shift());
-        }
-  
-        pullCard();
-      }
-     }
-    else {
-      if(player_deck.length === 0) {
-        if(debug) console.log("Computer Won!");
-        //setDisplay(<Score win={1}/>);
-      }
-      else {
-        if(debug) console.log("Player Won!");
-        //setDisplay(<Score win={2}/>);
-      }
-    }
-    }
-  */
 
   //==================================================================<
   useEffect(() => {
@@ -144,7 +138,7 @@ export default function Board() {
     <div className='w flex w-100 w-unit-per f-res gap-15 justify-c-c'>
       {/* AUTO MODE = TRUE, MUST PREVENT PULL CARD OPTION */}
       <Button w={'w-res w-12 w-unit-rem'} b={true} onClick={toMain} value={'To Main'} />
-      <Button w={'w-res w-12 w-unit-rem'} b={true} onClick={pullCard} value={'Pull Card'} />
+      <Button w={'w-res w-12 w-unit-rem'} b={true} onClick={makeATurn} value={'Pull Card'} />
       <Button w={'w-res w-12 w-unit-rem'} b={true} onClick={switchMode} value={'Auto Play'} />
 
     </div>
@@ -165,7 +159,7 @@ export default function Board() {
 
         <Card cust={usePDeckSize == 0 ? 'none' : ''} sh={'box-sh-sm-o-3'} card={jokerCard} flipable={false} />
         <StockPile stock={pHand.current} />
-        <input className={`w h b bg w-res h-res bg-res b-res bg-c-light bg-c-op-full absolute`} type='button' onClick={pullCard} />
+        <input className={`w h b bg w-res h-res bg-res b-res bg-c-light bg-c-op-full absolute`} type='button' onClick={makeATurn} />
 
       </div>
 
