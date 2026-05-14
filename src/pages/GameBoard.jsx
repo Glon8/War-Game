@@ -20,11 +20,16 @@ export default function Board() {
   const [usePDeckSize, setPDeckSize] = useState(0);
   const [usePcDeckSize, setPcDeckSize] = useState(0);
 
+  const [usePHand, setPHand] = useState([]);
+  const [usePcHand, setPcHand] = useState([]);
+
   const pDeck = useRef([]);
   const pcDeck = useRef([]);
 
   const pHand = useRef([]);
   const pcHand = useRef([]);
+
+  const onHand = useRef(false);
 
   //==================================================================<
   const toMain = () => { navigate('/') }
@@ -33,9 +38,14 @@ export default function Board() {
 
   const shouffleCards = (arr) => { arr.sort(() => Math.random() - 0.5); }
 
+  const sleep = (s) => new Promise(resolve => setTimeout(resolve, s * 1000));
+
   const updateUI = () => {
     setPDeckSize(pDeck.current.length);
     setPcDeckSize(pcDeck.current.length);
+
+    setPHand(pHand.current);
+    setPcHand(pcHand.current);
   }
 
   const createCardDeck = () => {
@@ -63,7 +73,7 @@ export default function Board() {
     return sum;
   }
 
-  const collectCards = (wDeck, wHand, lHand) => {
+  const collectCards = async (wDeck, wHand, lHand) => {
     if (!wDeck || !wHand || !lHand) return;
 
     shouffleCards(wHand);
@@ -72,7 +82,12 @@ export default function Board() {
     while (wHand.length !== 0) {
       wDeck.unshift(wHand.shift());
       wDeck.unshift(lHand.shift());
+
+      updateUI();
+      await sleep(0.2);
     }
+
+    onHand.current = false;
   }
 
   const endGame = (winner) => {
@@ -81,7 +96,7 @@ export default function Board() {
     // ENDGAME SCREEN HERE
   }
 
-  const powerTest = () => {
+  const powerTest = async () => {
     const pPower = handPower(pHand.current);
     const pcPower = handPower(pcHand.current);
     // if player has the strongest hand
@@ -95,14 +110,26 @@ export default function Board() {
         for (let i = 0; i < 4; i++) {
           pHand.current.unshift(pDeck.current.pop());
           pcHand.current.unshift(pcDeck.current.pop());
+
+          updateUI();
+          await sleep(1);
         }
 
+        await sleep(2);
         powerTest();
       }
     }
   }
 
-  const makeATurn = () => {
+  const makeATurn = async () => {
+    if (!!onHand.current) return;
+
+    console.log(onHand.current)
+
+    onHand.current = true;
+
+    console.log(onHand.current)
+
     const pDL = pDeck.current.length;
     const pcDL = pcDeck.current.length;
 
@@ -111,7 +138,7 @@ export default function Board() {
       pcHand.current.unshift(pcDeck.current.pop());
 
       updateUI();
-
+      await sleep(1.5);
       powerTest();
     }
     else { // < in case if one of the players lost all the cards in their deck
@@ -147,7 +174,7 @@ export default function Board() {
       <div className='w h flex w-res h-res h-16 h-unit-rem f-res gap-10'>
 
         <Card sh={'box-sh-sm-o-3'} card={jokerCard} flipable={false} />
-        <StockPile stock={pcHand.current} />
+        <StockPile stock={usePcHand} />
 
       </div>
       <div className='w flex font w-res f-res justify-c-ard c-dark c-op-md font-w-7'>
@@ -158,7 +185,7 @@ export default function Board() {
       <div className='w h flex w-res h-res h-16 h-unit-rem f-res gap-10 relative'>
 
         <Card cust={usePDeckSize == 0 ? 'none' : ''} sh={'box-sh-sm-o-3'} card={jokerCard} flipable={false} />
-        <StockPile stock={pHand.current} />
+        <StockPile stock={usePHand} />
         <input className={`w h b bg w-res h-res bg-res b-res bg-c-light bg-c-op-full absolute`} type='button' onClick={makeATurn} />
 
       </div>
