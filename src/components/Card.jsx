@@ -17,11 +17,11 @@ function Card({ card, stat, flipable = true, onClick, sh, cust }) {
         setStat(stat);
     }, [stat]);
 
-    return (<div className={`w h b w-res w-10 w-unit-rem h-res h-16 h-unit-rem flex relative ${sh ?? 'box-sh-lg-o-1'} ${cust ?? ''}`}>
+    return (<div className={`w-14 w-unit-rem h-12 h-unit-rem flex relative ${sh ?? 'box-sh-lg-o-1'} ${cust ?? ''}`}>
 
         <CardFace display={useStat} face={card} />
         <CardFace display={!useStat} />
-        <div className='w h w-100 w-unit-per h-100 h-unit-per absolute t-0 l-0'
+        <div className='w-100 w-unit-per h-100 h-unit-per absolute t-0 l-0'
             onClick={() => { flip(); onClick != null ? onClick?.({ card, useStat }) : null; }}></div>
 
     </div>)

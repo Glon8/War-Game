@@ -43,10 +43,10 @@ export default function Score({ scores, win }) {
 
   return (<Wrap>
 
-    <BackBoard cust={'justify-c-evn'}>
+    <BackBoard cust={'justify-c-evn h-60 h-unit-per'}>
 
-      <Title font={'font-s-3 font-w-7 font-s-unit-rem'} cust={'m-t-0'} value={'Score List'} />
-      <div className={`w h w-res w-95 w-unit-per h-res h-50 h-unit-per b bg bg-c-light bg-c-op-md b-r-5 p-x-3 p-y-4 mt-5`}>
+      <Title font={'font-w-7 font-s-3 font-s-unit-rem'} cust={'m-t-0'} value={'Score List'} />
+      <div className={`w-95 w-unit-per h-50 h-unit-per bg bg-c-light bg-c-op-md b-r-5 p-x-3 p-y-4`}>
         {
           useList?.map((el) => {
             return (<div className='f-res flex justify-between border-b-black border-b-2 gap-10'>

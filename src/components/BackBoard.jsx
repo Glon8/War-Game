@@ -1,14 +1,13 @@
 import React from 'react'
 
-function BackBoard({ children, w, h, r, bg, p, sh, cust }) {
-    return (<div className={`w h b bg flex
-        max-w-35 max-w-unit-rem ${w ?? ''} 
-        ${h ?? 'max-h-70'}
-        p-x-5 p-t-2 p-unit-per ${p ?? ''} 
-        flex-d-c 
+function BackBoard({ children, minW, minH, r, b, bg, p, sh, cust }) {
+    return (<div className={`${minW ?? 'min-w-65'} 
+        ${minH ?? 'min-h-25 min-h-unit-rem'}
+        ${p ?? 'p-x-5 p-t-2 p-unit-per'} 
+        flex flex-d-c 
         align-i-c 
-        b-r-10 ${r ?? ''} 
-        ${bg ?? 'bg-c-light bg-c-op-lg'} 
+        ${b ?? 'b-r-10'} 
+        ${bg ?? 'bg bg-c-light bg-c-op-lg'} 
         ${sh ?? 'box-sh-md-o-3'}
         ${cust ?? ''}`}>{children}</div>)
 }

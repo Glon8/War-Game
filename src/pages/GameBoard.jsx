@@ -15,7 +15,7 @@ export default function Board() {
 
   const jokerCard = { power: 15, type: 5 }; // < default card face
 
-  const [useAutoMode, setAutoMode] = useState(false);
+  //const [useAutoMode, setAutoMode] = useState(false);
 
   const [usePDeckSize, setPDeckSize] = useState(0);
   const [usePcDeckSize, setPcDeckSize] = useState(0);
@@ -29,16 +29,17 @@ export default function Board() {
   const pHand = useRef([]);
   const pcHand = useRef([]);
 
+  const auto = useRef(false);
   const onHand = useRef(false);
 
   //==================================================================<
-  const toMain = () => { navigate('/') }
+  const toMain = () => { navigate('/') };
 
-  const switchMode = () => { setAutoMode(!useAutoMode); }
+  const switchMode = () => { setAutoMode(!useAutoMode); };
 
-  const shouffleCards = (arr) => { arr.sort(() => Math.random() - 0.5); }
+  const shouffleCards = (arr) => { arr.sort(() => Math.random() - 0.5); };
 
-  const sleep = (s) => new Promise(resolve => setTimeout(resolve, s * 1000));
+  const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
   const updateUI = () => {
     setPDeckSize(pDeck.current.length);
@@ -46,7 +47,7 @@ export default function Board() {
 
     setPHand(pHand.current);
     setPcHand(pcHand.current);
-  }
+  };
 
   const createCardDeck = () => {
     for (let i = 1; i <= 4; i++)
@@ -54,14 +55,14 @@ export default function Board() {
         pcDeck.current.push({ power: j, type: i });
 
     if (debug) console.log("E: New card deck was made");
-  }
+  };
 
   const splitTheDeck = () => {
     while (pDeck.current.length < 26)
       pDeck.current.push(pcDeck.current.shift());
 
     if (debug) console.log("E: The deck was split equally between the players");
-  }
+  };
 
   const handPower = (array) => {
     let sum = 0;
@@ -71,7 +72,7 @@ export default function Board() {
     });
 
     return sum;
-  }
+  };
 
   const collectCards = async (wDeck, wHand, lHand) => {
     if (!wDeck || !wHand || !lHand) return;
@@ -84,17 +85,17 @@ export default function Board() {
       wDeck.unshift(lHand.shift());
 
       updateUI();
-      await sleep(0.2);
+      await sleep(200);
     }
 
     onHand.current = false;
-  }
+  };
 
   const endGame = (winner) => {
     if (debug) console.log(`${winner} Won!`);
 
     // ENDGAME SCREEN HERE
-  }
+  };
 
   const powerTest = async () => {
     const pPower = handPower(pHand.current);
@@ -112,23 +113,19 @@ export default function Board() {
           pcHand.current.unshift(pcDeck.current.pop());
 
           updateUI();
-          await sleep(1);
+          await sleep(1000);
         }
 
-        await sleep(2);
+        await sleep(2000);
         powerTest();
       }
     }
-  }
+  };
 
   const makeATurn = async () => {
     if (!!onHand.current) return;
 
-    console.log(onHand.current)
-
     onHand.current = true;
-
-    console.log(onHand.current)
 
     const pDL = pDeck.current.length;
     const pcDL = pcDeck.current.length;
@@ -138,7 +135,7 @@ export default function Board() {
       pcHand.current.unshift(pcDeck.current.pop());
 
       updateUI();
-      await sleep(1.5);
+      await sleep(1500);
       powerTest();
     }
     else { // < in case if one of the players lost all the cards in their deck
@@ -147,7 +144,15 @@ export default function Board() {
     }
 
     if (debug) console.log('E: Card has been pulled');
-  }
+  };
+
+  const autoPlay = async () => {
+    auto.current = !auto.current;
+
+    if (!auto.current) return;
+
+    while (pDeck.current.length && pcDeck.current.length && auto.current) await makeATurn();
+  };
 
   //==================================================================<
   useEffect(() => {
@@ -160,13 +165,17 @@ export default function Board() {
 
   useEffect(() => updateUI(), [pDeck.current, pcDeck.current]);
 
+  /*useEffect(() => {
+    autoPlay();
+  }, [useAutoMode]);*/
+
   return (<Wrap>
 
     <div className='w flex w-100 w-unit-per f-res gap-15 justify-c-c'>
       {/* AUTO MODE = TRUE, MUST PREVENT PULL CARD OPTION */}
       <Button w={'w-res w-12 w-unit-rem'} b={true} onClick={toMain} value={'To Main'} />
       <Button w={'w-res w-12 w-unit-rem'} b={true} onClick={makeATurn} value={'Pull Card'} />
-      <Button w={'w-res w-12 w-unit-rem'} b={true} onClick={switchMode} value={'Auto Play'} />
+      <Button w={'w-res w-12 w-unit-rem'} b={true} onClick={autoPlay} value={'Auto Play'} />
 
     </div>
     <BackBoard w={'max-w-40'} cust={'justify-c-ard'}>

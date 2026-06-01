@@ -9,10 +9,7 @@ export default function StockPile({ stock }) {
 
   useEffect(() => setSt(stock), [stock]);
 
-  return (<div className='w h flex 
-    w-res w-70 w-unit-per 
-    h-res
-    f-res
+  return (<div className='flex w-70 w-unit-per
     align-i-c
     relative
     dir-unit-per'>

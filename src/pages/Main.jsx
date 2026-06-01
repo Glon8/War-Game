@@ -14,16 +14,16 @@ export default function Main() {
 
     return (<Wrap>
 
-        <BackBoard>
+        <BackBoard cust={'p-y-5 p-unit-per'}>
 
             <Title value={'War-Game'} />
-            <div className='w h flex w-100 w-unit-per h-50 h-unit-per m-unit-per d-column align-i-c m-t-10 gap-25'>
+            <div className=' w-100 w-unit-per h-20 h-unit-per flex flex-d-c align-i-c m-t-10 m-unit-per gap-25'>
                 <Button b={true} value={'Start The Game'} onClick={toBoard} />
                 <Button b={true} value={'Scores'} onClick={toScore} />
             </div>
 
         </BackBoard>
-        <InitialsTag cust={'text text-d-und text-d-s-solid text-d-t-1'} />
+        <InitialsTag cust={'text-d-und text-d-s-solid text-d-t-1'} />
         <InitialsTag cust={'m-t-0'} value={'War-Game'} />
 
     </Wrap>);

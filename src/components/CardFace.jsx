@@ -53,13 +53,13 @@ export default function CardFace({ face, display }) {
         assign(face);
     }, [face]);
 
-    return (<div className={`w h flex b bg font w-100 w-unit-per relative
-    h-100 h-unit-per flex-d-c p-x-4 bg-c-light bg-c-op-no font-w-7 font-s-25 ${display ? '' : 'none'}`}>
+    return (<div className={`flex font w-100 w-unit-per relative
+    h-100 h-unit-per flex-d-c p-x-4 bg bg-c-light bg-c-op-no font-w-7 font-s-25 ${display ? '' : 'none'}`}>
 
-        <div className='w h w-95 top-1 left-4 w-unit-per align-c-c absolute'><img className='w w-100 w-unit-per' src={useImg} alt={useAlt} /></div>
-        <div className='w h flex w-100 h-100 w-unit-per h-unit-per justify-c-btw'>
-            <div className={`h h-15 ${!!useTitle ? '' : 'none'}`} >{useTitle}</div>
-            <div className={`h h-15 text text-a-r ${!!useTitle ? '' : 'none'}`}>{useTitle}</div>
+        <div className='w-95 top-1 left-4 w-unit-per align-c-c absolute'><img className='w-100 w-unit-per' src={useImg} alt={useAlt} /></div>
+        <div className='flex w-100 h-100 w-unit-per h-unit-per justify-c-btw'>
+            <div className={`h-15 ${!!useTitle ? '' : 'none'}`} >{useTitle}</div>
+            <div className={`h-15 text text-a-r ${!!useTitle ? '' : 'none'}`}>{useTitle}</div>
         </div>
 
     </div >);
